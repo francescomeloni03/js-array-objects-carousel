@@ -1,3 +1,6 @@
+
+// Array di oggetti
+
 const images = [
     {
         image: 'img/01.webp',
@@ -21,3 +24,101 @@ const images = [
         text: 'Marvel\'s Avengers is an epic, third-person, action-adventure game that combines an original, cinematic story with single-player and co-operative gameplay.',
     }
 ];
+
+
+// Popolare il carosello dinamicamente
+
+const boxLeft = document.getElementById("boxLeft");
+const boxInterno = document.getElementById("boxInterno");
+
+images.forEach((element, index) => {
+    boxInterno.innerHTML += `<img src="./${element.image}" alt="">`
+
+     if ( index == 0){
+        boxLeft.innerHTML += `<img class="imgLeft" src="./${element.image}" alt=""><div class="biografia"> <h2>${element.title}</h2><h3>${element.text}<h3/>`
+     } 
+     else {
+        boxLeft.innerHTML += `<div class="d-None"> <img class="imgLetf" src="./${element.image}" alt=""> <div class="biografia"> <h2>${element.title}</h2><h3>${element.text}<h3/>  </div>`
+    } 
+     }
+    
+
+)
+
+
+
+
+let btnIndietro = document.getElementById("indietro");
+let btnAvanti = document.getElementById("avanti");
+let imgLeft = document.getElementsByClassName("imgLeft")
+
+
+let scrollImgEM = document.getElementsByClassName("scrollImg");
+let pointScroll = 0;
+
+
+// Click sul button per scrollare indietro
+
+btnIndietro.addEventListener("click", function(){
+
+    if(pointScroll>0) {
+        for (let c = 0; c < scrollImgEM.length; c++) {
+                const scrollImg = scrollImgEM[c];
+
+            if(c == pointScroll-1 ) {
+                scrollImg.classList.remove("d-None");
+            } else {
+                scrollImg.classList.add("d-None");
+            }
+        }
+        
+        pointScroll--;
+    } else {
+        let ultimaScrollImg = scrollImgEM [images.length-1]
+        let primaScrollImg =  scrollImgEM [0]
+        primaScrollImg.classList.add("d-None");
+        ultimaScrollImg.classList.remove("d-None");
+        pointScroll = images.length-1
+    }
+
+});
+
+
+// Click sul button per scrollare avanti
+
+
+btnAvanti.addEventListener("click", function(){
+
+    if(pointScroll < images.length-1) {
+        for (let c = 0; c < images.length; c++) {
+            const scrollImg = scrollImgEM[c];
+
+            if(c == pointScroll+1 ) {
+                scrollImg.classList.remove("d-None");
+            } else {
+                scrollImg.classList.add("d-None");
+            }
+        }
+        
+        pointScroll++;
+
+    } else {
+        let ultimaScrollImg = scrollImgEM [images.length-1]
+        ultimaScrollImg.classList.add("d-None");
+        let primaScrollImg =  scrollImgEM [0]
+        primaScrollImg.classList.remove("d-None");
+        pointScroll = 0;
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
