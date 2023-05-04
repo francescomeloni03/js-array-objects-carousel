@@ -31,14 +31,15 @@ const images = [
 const boxLeft = document.getElementById("boxLeft");
 const boxInterno = document.getElementById("boxInterno");
 
+
 images.forEach((element, index) => {
     boxInterno.innerHTML += `<img src="./${element.image}" alt="">`
 
      if ( index == 0){
-        boxLeft.innerHTML += `<img class="imgLeft" src="./${element.image}" alt=""><div class="biografia"> <h2>${element.title}</h2><h3>${element.text}<h3/>`
+        boxLeft.innerHTML += `<div class="imgLeft"><img src="./${element.image}" alt=""><div class="biografia"> <h2>${element.title}</h2><h3>${element.text}<h3/></div></div>`
      } 
      else {
-        boxLeft.innerHTML += `<div class="d-None"> <img class="imgLetf" src="./${element.image}" alt=""> <div class="biografia"> <h2>${element.title}</h2><h3>${element.text}<h3/>  </div>`
+        boxLeft.innerHTML += `<div class="imgLeft d-None"> <img src="./${element.image}" alt=""> <div class="biografia"> <h2>${element.title}</h2><h3>${element.text}<h3/></div></div>`
     } 
      }
     
@@ -50,12 +51,13 @@ images.forEach((element, index) => {
 
 let btnIndietro = document.getElementById("indietro");
 let btnAvanti = document.getElementById("avanti");
-let imgLeft = document.getElementsByClassName("imgLeft")
+let scrollImgEM = document.getElementsByClassName("imgLeft");
 
 
-let scrollImgEM = document.getElementsByClassName("scrollImg");
+
+
+
 let pointScroll = 0;
-
 
 // Click sul button per scrollare indietro
 
@@ -64,6 +66,8 @@ btnIndietro.addEventListener("click", function(){
     if(pointScroll>0) {
         for (let c = 0; c < scrollImgEM.length; c++) {
                 const scrollImg = scrollImgEM[c];
+                // console.log(pointScroll);
+      
 
             if(c == pointScroll-1 ) {
                 scrollImg.classList.remove("d-None");
@@ -92,7 +96,8 @@ btnAvanti.addEventListener("click", function(){
     if(pointScroll < images.length-1) {
         for (let c = 0; c < images.length; c++) {
             const scrollImg = scrollImgEM[c];
-
+            // console.log(pointScroll);
+     
             if(c == pointScroll+1 ) {
                 scrollImg.classList.remove("d-None");
             } else {
